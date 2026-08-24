@@ -1,0 +1,13 @@
+# Buil/d system
+Makefile.cfg
+
+# Binary
+build/
+pestilence
+
+# clangd
+.cache/
+compile_commands.json
+
+# nvim
+.nfs*
