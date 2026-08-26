@@ -1,5 +1,5 @@
-#ifndef  FAMINE_H
-# define FAMINE_H
+#ifndef  PESTILENCE_H
+# define PESTILENCE_H
 
 // ---
 // Includes
@@ -11,8 +11,8 @@
 // Defines
 // ---
 
-#define FAMINE_SIGN "Pestilence version 1.0 (c)oded by ale-boud - amassias"
-#define FAMINE_SIGN_LEN 54
+#define PESTILENCE_SIGN "Pestilence version 1.0 (c)oded by ale-boud - amassias"
+#define PESTILENCE_SIGN_LEN 54
 
 // ---
 // Typedefs

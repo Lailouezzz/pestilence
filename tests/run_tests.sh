@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 BINDIR="$SCRIPT_DIR/bin"
 RESULTS_DIR="$SCRIPT_DIR/results"
-FAMINE="$PROJECT_DIR/pestilence"
+PESTILENCE="$PROJECT_DIR/pestilence"
 
 # Test directories used by pestilence
 TEST_DIR="/tmp/test"
@@ -27,7 +27,7 @@ FAILED=0
 SKIPPED=0
 
 # Pestilence signature (from include/pestilence.h)
-FAMINE_SIGN="Pestilence version 1.0 (c)oded by ale-boud - amassias"
+PESTILENCE_SIGN="Pestilence version 1.0 (c)oded by ale-boud - amassias"
 
 # Directories
 mkdir -p "$RESULTS_DIR"
@@ -65,7 +65,7 @@ describe_exit() {
 is_infected() {
     local binary="$1"
     # Check if signature exists anywhere in the binary
-    if grep -q "$FAMINE_SIGN" "$binary" 2>/dev/null; then
+    if grep -q "$PESTILENCE_SIGN" "$binary" 2>/dev/null; then
         return 0
     fi
     # Alternative: check if WOODY banner appears when running
@@ -100,7 +100,7 @@ run_test() {
     fi
 
     # Check if pestilence exists
-    if [ ! -f "$FAMINE" ]; then
+    if [ ! -f "$PESTILENCE" ]; then
         ((SKIPPED++)) || true
         printf "[%3d] %-50s ${YELLOW}SKIP${NC} (no pestilence)\n" "$TOTAL" "$name"
         return
@@ -129,7 +129,7 @@ run_test() {
 
     # Run pestilence to infect
     local pestilence_output pestilence_exit
-    pestilence_output=$("$FAMINE" 2>&1)
+    pestilence_output=$("$PESTILENCE" 2>&1)
     pestilence_exit=$?
 
     if [ $pestilence_exit -ne 0 ]; then
@@ -252,7 +252,7 @@ run_reinfection_test() {
     fi
 
     # Check if pestilence exists
-    if [ ! -f "$FAMINE" ]; then
+    if [ ! -f "$PESTILENCE" ]; then
         ((SKIPPED++)) || true
         printf "[%3d] %-50s ${YELLOW}SKIP${NC} (no pestilence)\n" "$TOTAL" "$name"
         return
@@ -270,7 +270,7 @@ run_reinfection_test() {
     chmod +x "$test_binary"
 
     # First infection
-    "$FAMINE" >/dev/null 2>&1
+    "$PESTILENCE" >/dev/null 2>&1
 
     if ! is_infected "$test_binary"; then
         clean_test_dirs
@@ -285,7 +285,7 @@ run_reinfection_test() {
     infected_size=$(stat -c%s "$test_binary")
 
     # Second infection attempt
-    "$FAMINE" >/dev/null 2>&1
+    "$PESTILENCE" >/dev/null 2>&1
 
     # Get new hash after second run
     local new_hash new_size
