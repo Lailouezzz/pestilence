@@ -578,7 +578,7 @@ static bool	_is_program_running(
 				const char *path
 				)
 {
-	constexpr size_t	buf_sz = 8192;
+	const size_t	buf_sz = 8192;
 	alignas(8) unsigned char buf[buf_sz];
 	long			fd;
 	long			n;
