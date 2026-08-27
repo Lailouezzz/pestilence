@@ -12,7 +12,7 @@
 // ---
 
 #define PESTILENCE_SIGN "Pestilence version 1.0 (c)oded by ale-boud - amassias"
-#define PESTILENCE_SIGN_LEN 54
+#define PESTILENCE_SIGN_LEN (sizeof(PESTILENCE_SIGN))
 
 // ---
 // Typedefs
